@@ -2,6 +2,17 @@ organization := "tech.christopherdavenport"
 
 name := "resumptuous"
 
+libraryDependencies ++= {
+  val circeV = "0.8.0-RC1"
+  Seq(
+    "io.circe"      %% "circe-core"    % circeV,
+    "io.circe"      %% "circe-generic" % circeV,
+    "io.circe"      %% "circe-parser"  % circeV,
+    "org.typelevel" %% "discipline"    % "0.7.3" % Test,
+    "org.scalatest" %% "scalatest"     % "3.0.1" % Test
+  )
+}
+
 /*
  * Compatibility version.  Use this to declare what version with
  * which `master` remains in compatibility.  This is literally
@@ -37,7 +48,8 @@ val BaseVersion = "0.1"
 
 licenses += ("MIT", url("https://opensource.org/licenses/MIT"))
 
-// bintrayVcsUrl := Some("...")
+bintrayVcsUrl in ThisBuild := Some(
+  "git@github.com:ChristopherDavenport/resumptuous.git")
 
 /***********************************************************************\
                       Boilerplate below these lines
@@ -102,7 +114,8 @@ scalacOptions ++= Seq(
   "-Ywarn-unused:params", // Warn if a value parameter is unused.
   "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
   "-Ywarn-unused:privates", // Warn if a private member is unused.
-  "-Ywarn-value-discard" // Warn when non-Unit expression results are unused.
+  "-Ywarn-value-discard", // Warn when non-Unit expression results are unused.
+  "-Yno-imports" // no automatic imports at all; all symbols must be imported explicitly
 )
 
 scalacOptions in (Compile, console) ~= (_.filterNot(

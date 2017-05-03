@@ -5,7 +5,6 @@ import org.scalatest.{FlatSpec, Matchers}
 import io.circe.generic.auto._
 import io.circe.parser._
 import io.circe._
-// io.circe.generic.semiauto._
 //import io.circe.syntax._
 import scala.Right
 import scala.{None, Some}
@@ -81,8 +80,6 @@ class JsonResumeSpec extends FlatSpec with Matchers {
 
   it should "Fail to Parse a Random Email String" in {
     pendingUntilFixed {
-      info("Email Parser Not In Place")
-
       val resume =
         Source
           .fromResource("jsonresume/examples/invalid/invalid-email.json")
@@ -92,7 +89,6 @@ class JsonResumeSpec extends FlatSpec with Matchers {
         throw decode[JsonResume](resume).swap
           .getOrElse(new Throwable("Json Decode Did Not Fail"))
       }
-      ()
     }
   }
 

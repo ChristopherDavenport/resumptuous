@@ -126,6 +126,12 @@ scalacOptions in (Compile, console) ~= (_.filterNot(
 
 scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value
 
+// Filter -Ywarn-value-discard for pendingUntilFixed
+scalacOptions in Test ~= (_.filterNot(
+  Set(
+    "-Ywarn-value-discard"
+  )))
+
 enablePlugins(GitVersioning)
 
 val ReleaseTag = """^v([\d\.]+)$""".r
